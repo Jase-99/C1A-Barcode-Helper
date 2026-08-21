@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -178,7 +177,6 @@
         .btn-success {
             background-color: var(--emerald);
         }
-
         .btn-success:hover {
             background-color: #059669;
         }
@@ -234,7 +232,6 @@
         .barcode-card:hover {
             border-color: var(--accent-indigo);
         }
-
         .barcode-card.flagged {
             background: linear-gradient(135deg, #221414 0%, #0b0f19 100%) !important;
             border: 1px solid #ef4444 !important;
@@ -378,10 +375,9 @@
         }
 
         @media print {
-            body>*:not(#print-container) {
+            body > *:not(#print-container) {
                 display: none !important;
             }
-
             body {
                 background: white !important;
                 color: black !important;
@@ -389,7 +385,6 @@
                 margin: 0 !important;
                 min-height: auto !important;
             }
-
             #print-container {
                 display: block !important;
                 position: absolute !important;
@@ -399,7 +394,7 @@
                 height: auto !important;
                 background: white !important;
             }
-
+            
             /* Single label print layout */
             .single-label-print {
                 text-align: center;
@@ -441,8 +436,7 @@
                 background: white;
                 color: black;
                 box-sizing: border-box;
-                height: 51.4mm !important;
-                /* Calibrated 3x5 grid cell height on A4 */
+                height: 51.4mm !important; /* Calibrated 3x5 grid cell height on A4 */
                 page-break-inside: avoid;
                 font-family: sans-serif;
             }
@@ -499,14 +493,12 @@
         }
     </style>
 </head>
-
 <body>
 
     <div class="container">
         <header>
-            <h1>Inventory Log Barcode Companion</h1>
-            <p>C1A Utility</p>
-            <div class="badge-offline">V13 - Jason Henshall</div>
+            <h1>C1A Utility</h1>
+            <p style="font-weight: 700; color: var(--accent-indigo);">V4 - Jason Henshall</p>
         </header>
 
         <div class="layout-grid">
@@ -514,50 +506,33 @@
             <div class="space-y-4">
                 <div class="card">
                     <h2 class="card-title">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            style="stroke-width:2;">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                            </path>
-                        </svg>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="stroke-width:2;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                         PDF Log Text Parser
                     </h2>
                     <div class="instructions">
-                        <p>This utility converts standard Inventory logs into easy to print and scan barcodes.</p>
+                        <p>This utility runs entirely inside your browser without any network connection.</p>
                         <ol>
                             <li>Open your PDF log sheet.</li>
                             <li>Select the entire page or lines (<b>Ctrl+A</b>).</li>
                             <li>Copy (<b>Ctrl+C</b>) and paste (<b>Ctrl+V</b>) below.</li>
                         </ol>
                     </div>
-                    <textarea id="raw-log-input"
-                        placeholder="Paste copied PDF stock adjustment log lines here..."></textarea>
-
+                    <textarea id="raw-log-input" placeholder="Paste copied PDF stock adjustment log lines here..."></textarea>
+                    
                     <button id="parse-btn" class="btn">
-                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            style="stroke-width:2.5;">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="stroke-width:2.5;"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                         Parse & Generate Barcodes
                     </button>
-
+                    
                     <button id="demo-btn" class="btn btn-outline">
                         Preload Feb 2024 Demo
                     </button>
-                    <button id="clear-btn" class="btn btn-outline"
-                        style="border-color: rgba(239, 68, 110, 0.2); color: #fca5a5;">
+                    <button id="clear-btn" class="btn btn-outline" style="border-color: rgba(239, 68, 110, 0.2); color: #fca5a5;">
                         Clear Catalog
                     </button>
-
-                    <button id="print-all-btn" class="btn btn-success"
-                        style="display: none; margin-top: 1rem; background-color: var(--emerald);">
-                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            style="stroke-width:2.5; margin-right: 0.25rem;">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-3a2 2 0 00-2-2H9a2 2 0 00-2 2v3a2 2 0 002 2zm5-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h5z">
-                            </path>
-                        </svg>
+                    
+                    <button id="print-all-btn" class="btn btn-success" style="display: none; margin-top: 1rem; background-color: var(--emerald);">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="stroke-width:2.5; margin-right: 0.25rem;"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-3a2 2 0 00-2-2H9a2 2 0 00-2 2v3a2 2 0 002 2zm5-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h5z"></path></svg>
                         Print All (A4 3x5 Grid)
                     </button>
                 </div>
@@ -566,22 +541,17 @@
             <!-- Right Column: Barcodes Grid -->
             <div>
                 <div class="card" style="min-height: 400px;">
-                    <div class="catalog-header"
-                        style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+                    <div class="catalog-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
                         <h2 class="card-title" style="margin-bottom:0;">
                             Generated Barcode Catalog
                         </h2>
                         <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-                            <label
-                                style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); cursor: pointer; user-select: none; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.15); padding: 0.25rem 0.5rem; border-radius: 0.375rem; transition: all 0.2s;">
-                                <input type="checkbox" id="filter-old-stock"
-                                    style="accent-color: var(--accent-indigo); cursor: pointer; width: 0.85rem; height: 0.85rem;">
+                            <label style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); cursor: pointer; user-select: none; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.15); padding: 0.25rem 0.5rem; border-radius: 0.375rem; transition: all 0.2s;">
+                                <input type="checkbox" id="filter-old-stock" style="accent-color: var(--accent-indigo); cursor: pointer; width: 0.85rem; height: 0.85rem;">
                                 <span style="color: #fca5a5;">⚠️ > 3W Only</span>
                             </label>
-                            <label
-                                style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); cursor: pointer; user-select: none; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.15); padding: 0.25rem 0.5rem; border-radius: 0.375rem; transition: all 0.2s;">
-                                <input type="checkbox" id="filter-new-stock"
-                                    style="accent-color: var(--accent-indigo); cursor: pointer; width: 0.85rem; height: 0.85rem;">
+                            <label style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); cursor: pointer; user-select: none; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.15); padding: 0.25rem 0.5rem; border-radius: 0.375rem; transition: all 0.2s;">
+                                <input type="checkbox" id="filter-new-stock" style="accent-color: var(--accent-indigo); cursor: pointer; width: 0.85rem; height: 0.85rem;">
                                 <span style="color: #a7f3d0;">✅ < 3W Only</span>
                             </label>
                             <span id="catalog-count" class="counter">0 Articles</span>
@@ -591,13 +561,10 @@
                     <!-- Catalog Empty State -->
                     <div id="empty-state" class="empty-state">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
-                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                         </svg>
                         <p style="font-weight:600; margin-bottom:0.25rem;">No Barcodes Displayed</p>
-                        <p style="font-size:0.8rem;">Paste some stock log text or preload the demo dataset to populate
-                            the on-screen catalog.</p>
+                        <p style="font-size:0.8rem;">Paste some stock log text or preload the demo dataset to populate the on-screen catalog.</p>
                     </div>
 
                     <!-- Grid Layout -->
@@ -646,11 +613,11 @@
 
         // Preloaded 14 standard elements from February 2024 Stock Adjustment Logs
         const demoDataset = [
-            { article: "286061", description: "Mothers Recipe Ginger Garlic 1.1kg", supplier: "GROCERIES", prevSoh: "—", newSoh: "0", lastReceived: "20/12/2099" },
+            { article: "286061", description: "Mothers Recipe Ginger Garlic 1.1kg", supplier: "GROCERIES", prevSoh: "—", newSoh: "0", lastReceived: "20/12/2024" },
             { article: "286199", description: "Mothers Recipe Chaat Masala 100g", supplier: "GROCERIES", prevSoh: "—", newSoh: "0", lastReceived: "08/10/2024" },
             { article: "288099", description: "Mothers Recipe Biryani Masala 60g", supplier: "GROCERIES", prevSoh: "—", newSoh: "0", lastReceived: "02/01/2025" },
-            { article: "289206", description: "Mothers Recipe Kasuri Methi 25g", supplier: "GROCERIES", prevSoh: "—", newSoh: "0", lastReceived: "" },
-            { article: "421149", description: "Mothers Recipe MangoHot Pickle 500g", supplier: "GROCERIES", prevSoh: "—", newSoh: "0", lastReceived: "08/02/2099" },
+            { article: "289206", description: "Mothers Recipe Kasuri Methi 25g", supplier: "GROCERIES", prevSoh: "—", newSoh: "0", lastReceived: "16/01/2025" },
+            { article: "421149", description: "Mothers Recipe MangoHot Pickle 500g", supplier: "GROCERIES", prevSoh: "—", newSoh: "0", lastReceived: "08/02/2025" },
             { article: "422210", description: "Mothers Recipe Madras Papad 100g", supplier: "GROCERIES", prevSoh: "—", newSoh: "0", lastReceived: "28/12/2024" }
         ];
 
@@ -701,7 +668,7 @@
             }
             toast.textContent = message;
             toastContainer.appendChild(toast);
-
+            
             setTimeout(() => toast.classList.add('show'), 50);
             setTimeout(() => {
                 toast.classList.remove('show');
@@ -723,7 +690,7 @@
         }
 
         // Multi-line continuous text regex parser (robust to vertical splits)
-        // Multi-line continuous text regex parser (scrambled table layout reconstruction)
+                // Multi-line continuous text regex parser (scrambled table layout reconstruction)
         function parseRawTextData() {
             const rawText = rawLogInput.value.trim();
             if (!rawText) {
@@ -732,7 +699,7 @@
             }
 
             const lines = rawText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
-
+            
             // Auto-detect layout
             const isContinental = rawText.includes("Inventory Report") || rawText.includes("Displays Values of: SOH") || rawText.includes("MPL");
 
@@ -750,16 +717,16 @@
 
             for (let idx = 0; idx < lines.length; idx++) {
                 const line = lines[idx];
-
+                
                 // Track current department (e.g., "GROCERIES Inventory Sales Value:0.00")
                 const deptMatch = line.match(/^([A-Z\s]{3,})\s+Inventory\s+Sales\s+Value:/);
                 if (deptMatch) {
                     currentDept = deptMatch[1].trim();
                     continue;
                 }
-
-                // Match 6-digit article ID followed by status indicator (PI, D, P, PB)
-                const match = line.match(/^(\d{6})\s+(PI|D|P|PB)\s+/i);
+                
+                // Match 3 to 8-digit article ID followed by status indicator (PI, D, P, PB)
+                const match = line.match(/^(\d{3,8})\s+(PI|D|P|PB)\s+/i);
                 if (match) {
                     anchors.push({
                         line_idx: idx,
@@ -784,7 +751,7 @@
                 // 1. Description
                 let description = "Unknown Product";
                 const firstLine = segmentLines[0];
-                const descMatch = firstLine.match(/^\d{6}\s+(?:PI|D|P|PB)\s+(.*?)\s+(?:EA|KG|UOM)\s+/i);
+                const descMatch = firstLine.match(/^\d+\s+(?:PI|D|P|PB)\s+(.*?)\s+(?:EA|KG|UOM)\s+/i);
                 if (descMatch) {
                     description = descMatch[1].trim();
                 }
@@ -801,11 +768,24 @@
 
                 // 3. Stock on Hand (SOH)
                 let SOH = "0";
-                for (let sLine of segmentLines) {
-                    const priceSohMatch = sLine.match(/^(\d+\.\d+)\s+(-?\d+)$/);
-                    if (priceSohMatch) {
-                        SOH = priceSohMatch[2];
-                        break;
+                const uomMatch = firstLine.match(/\s+(?:EA|KG|UOM)\s+(.*)/i);
+                if (uomMatch) {
+                    const trailingTokens = uomMatch[1].trim().split(/\s+/);
+                    if (trailingTokens.length >= 2) {
+                        const possibleSoh = trailingTokens[1];
+                        if (/^-?\d+(\.\d+)?$/.test(possibleSoh)) {
+                            SOH = possibleSoh;
+                        }
+                    }
+                }
+
+                if (SOH === "0" || SOH === "—") {
+                    for (let sLine of segmentLines) {
+                        const priceSohMatch = sLine.match(/^(\d+\.\d+)\s+(-?\d+)$/);
+                        if (priceSohMatch) {
+                            SOH = priceSohMatch[2];
+                            break;
+                        }
                     }
                 }
 
@@ -850,34 +830,34 @@
             function isMetadata(line) {
                 const l = line.trim();
                 if (!l) return true;
-
+                
                 // Dates and times
                 if (/\d{2}\/\d{2}\/\d{4}/.test(l)) return true;
                 if (/\d{4}-\d{2}-\d{2}/.test(l)) return true;
                 if (/^\d{2}:\d{2}:\d{2}$/.test(l)) return true;
-
+                
                 // Stock values/quantities blocks (e.g., "1.00 0.00 -1.00" or "4.00 1.00 -3.00")
                 if (/^[-+]?\d+\.\d+\s+[-+]?\d+\.\d+\s+[-+]?\d+\.\d+/.test(l)) return true;
                 if (/^[-+]?\d+\.\d+$/.test(l)) return true;
-
+                
                 // Employee signatures, IDs, names
                 const upper = l.toUpperCase();
                 if (upper === 'JASON' || upper === 'HENSHALL' || upper.startsWith('HENSHALL(9883') || upper === '92)') return true;
                 if (/^HENSHALL\(\d+$/i.test(l)) return true;
                 if (/^\d+\)$/.test(l)) return true;
-
+                
                 // Report headers & footers
                 if (l.startsWith("Adjustment Log Report") || l.startsWith("Report for:") || l.startsWith("3901 |") || l.startsWith("Adjustments for :")) return true;
                 if (l.startsWith("List of articles") || l.startsWith("Reason Code &") || l.startsWith("Last") || l.startsWith("Article Prev SOH") || l.startsWith("Description Date & Time")) return true;
                 if (l.startsWith("User/System Qty.") || l.startsWith("Description New SOH") || l.startsWith("Received OM") || l.startsWith("Adjusted") || l.startsWith("Printed on:") || l.startsWith("Page ")) return true;
-
+                
                 // Units and Suppliers
                 if (l.includes("EA ")) return true;
                 if (l.endsWith("NDC") || l.endsWith("DC") || l === "South" || l === "Regional DC") return true;
-
+                
                 // Skip the anchor line itself
                 if (/^\d{5,7}\s*[-–—\s]*Stock\s+Correction/i.test(l)) return true;
-
+                
                 return false;
             }
 
@@ -906,14 +886,14 @@
             const items = [];
             for (let idx = 0; idx < anchors.length; idx++) {
                 const anchor = anchors[idx];
-
+                
                 // Perfect paired extraction: prefix at idx * 2, suffix at idx * 2 + 1
                 const prefIdx = idx * 2;
                 const suffIdx = idx * 2 + 1;
-
+                
                 const pref = (prefIdx < descLines.length) ? descLines[prefIdx] : "";
                 const suff = (suffIdx < descLines.length) ? descLines[suffIdx] : "";
-
+                
                 let description = `${pref} ${suff}`.trim();
                 if (!description) {
                     description = `Product ID ${anchor.article}`;
@@ -924,7 +904,7 @@
                 const endIdx = (idx + 1 < anchors.length) ? anchors[idx + 1].line_idx : lines.length;
                 const surroundingLines = lines.slice(startIdx, endIdx);
                 const joinedSurrounding = surroundingLines.join(" ");
-
+                
                 let supplier = "General Supplier";
                 if (joinedSurrounding.includes("Sydney")) {
                     supplier = "Sydney NDC";
@@ -1001,11 +981,11 @@
             showToast(`Extracted ${items.length} items from text!`, "success");
             renderDashboard();
         }
-
+        
         function renderDashboard() {
             const showOldOnly = document.getElementById('filter-old-stock') && document.getElementById('filter-old-stock').checked;
             const showNewOnly = document.getElementById('filter-new-stock') && document.getElementById('filter-new-stock').checked;
-
+            
             let displayCatalog = catalog;
             if (showOldOnly) {
                 displayCatalog = catalog.filter(item => isOver3Weeks(item.lastReceived));
@@ -1031,7 +1011,7 @@
                 const card = document.createElement('div');
                 const isFlagged = isOver3Weeks(item.lastReceived);
                 card.className = "barcode-card" + (isFlagged ? " flagged" : "");
-
+                
                 // Generate native Code 128 SVG string offline
                 const barcodeSVG = generateCode128SVG(item.article);
 
@@ -1092,14 +1072,14 @@
             const m = parseInt(parts[1], 10) - 1; // 0-indexed month
             const y = parseInt(parts[2], 10);
             const lastRecDate = new Date(y, m, d);
-
+            
             const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            lastRecDate.setHours(0, 0, 0, 0);
-
+            today.setHours(0,0,0,0);
+            lastRecDate.setHours(0,0,0,0);
+            
             const diffTime = today - lastRecDate;
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
+            
             return diffDays > 21; // 21 days = 3 weeks
         }
 
@@ -1142,7 +1122,7 @@
             for (let i = 0; i < rawStripeWidths.length; i++) {
                 const width = rawStripeWidths[i] * unitWidth;
                 const isBar = (i % 2 === 0); // Alternate starting with a black bar
-
+                
                 if (isBar) {
                     pathData += `M ${xPosition} 0 h ${width} v ${svgHeight} h -${width} Z `;
                 }
@@ -1187,7 +1167,7 @@
         function printAllBarcodes() {
             const showOldOnly = document.getElementById('filter-old-stock') && document.getElementById('filter-old-stock').checked;
             const showNewOnly = document.getElementById('filter-new-stock') && document.getElementById('filter-new-stock').checked;
-
+            
             let activeCatalog = catalog;
             if (showOldOnly) {
                 activeCatalog = catalog.filter(item => isOver3Weeks(item.lastReceived));
@@ -1245,5 +1225,4 @@
         }
     </script>
 </body>
-
 </html>
